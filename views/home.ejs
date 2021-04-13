@@ -8,9 +8,9 @@
 
 <%  postsAdded.forEach(function(post){ %>
 
-   <div>
-   <h1> <%= post.title %></h1>
-    <p> <%= post.body.substring(0,200) + "..." %> <a href="posts/<%= post.title %>">Read More</a></p>
+   <div class="post">
+   <h1 class="opaque"> <%= post.title %></h1>
+    <p  class="opaque"> <%= post.body.substring(0,200) + "..." %> <a href="posts/<%= post.title %>">Read More</a></p>
 
   </div>
 

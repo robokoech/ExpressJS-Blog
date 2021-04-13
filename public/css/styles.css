@@ -14,7 +14,14 @@
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
 }
+.post{
+  padding-top: 10px;
+}
 
+.opaque{
+  opacity: .75;
+
+}
 .footer-padding {
 	padding-bottom: 60px;
 }
