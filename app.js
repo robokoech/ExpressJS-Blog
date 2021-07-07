@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
 //jshint esversion:6
 
@@ -24,7 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 //create a new db//
-mongoose.connect("mongodb+srv://admin-rob:Lakers123@cluster0.gkjid.mongodb.net/blogDB2", {
+mongoose.connect(process.env.MONGOOSE, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true
@@ -45,13 +46,9 @@ const postSchema = new mongoose.Schema({
 //next we need a model
 const Post = mongoose.model("Post", postSchema);
 
-const testPost = new Post({
-  title: "This is an example title",
-  body: "hey yo big body bes"
 
-});
 
-//estPost.save()
+
 app.get("/", function(req, res) {
 
 
@@ -91,9 +88,6 @@ app.get("/posts/:postName", function(req, res) {
   });
 
 
-  // if (_.lowerCase(title) === (_.lowerCase(requestedTitle)) ){
-  //   res.render("post", {individualTitle: title, individualBody: body});
-  // }
 });
 
 
@@ -125,10 +119,7 @@ app.post("/compose", function(req, res) {
   let newTitleText = req.body.newTitleEntry;
   let newBodyText = req.body.newBodyEntry;
 
-  // const post = {
-  //   newTitle: newTitleText,
-  //   newBody: newBodyText
-  // };
+
 
   const dbPost = new Post({
     title: newTitleText,
