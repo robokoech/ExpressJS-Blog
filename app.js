@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 //jshint esversion:6
@@ -15,7 +14,7 @@ const contactContent = "Robert.Koech@duke.edu";
 
 const app = express();
 
-const posts =[];
+const posts = [];
 
 app.set('view engine', 'ejs');
 
@@ -58,53 +57,61 @@ app.get("/", function(req, res) {
 
   Post.find({}, function(err, foundItems) {
 
-    //mongoose.connection.close();
-    //using the for each we are printing each name
-    //console.log(foundItems.name);
 
-      res.render("home", {homePageContent: homeStartingContent, postsAdded: foundItems});
+    res.render("home", {
+      homePageContent: homeStartingContent,
+      postsAdded: foundItems
+    });
 
   });
 
-  //res.render("home", {homePageContent: homeStartingContent, postsAdded: posts});
 
 
 });
 
 app.get("/posts/:postName", function(req, res) {
-//moderrn code
-//   if (posts.some(e => e.newTitle === req.params.postName )) {
-//   /* vendors contains the element we're looking for */
-//   console.log("Match found");
-// }
-//this is how we access the thing someone typed
-const requestedTitle = req.params.postName;
+  //moderrn code
+  //   if (posts.some(e => e.newTitle === req.params.postName )) {
+  //   /* vendors contains the element we're looking for */
+  //   console.log("Match found");
+  // }
+  //this is how we access the thing someone typed
+  const requestedTitle = req.params.postName;
 
-Post.findOne({title:requestedTitle}, function(err, foundPost){
-  const title = foundPost.title;
-  const body = foundPost.body;
-  res.render("post", {individualTitle: title, individualBody: body});
+  Post.findOne({
+    title: requestedTitle
+  }, function(err, foundPost) {
+    const title = foundPost.title;
+    const body = foundPost.body;
+    res.render("post", {
+      individualTitle: title,
+      individualBody: body
+    });
 
-});
+  });
 
 
   // if (_.lowerCase(title) === (_.lowerCase(requestedTitle)) ){
   //   res.render("post", {individualTitle: title, individualBody: body});
   // }
-  });
+});
 
 
 
 
 app.get("/contact", function(req, res) {
 
-  res.render("contact", {contactText: contactContent});
+  res.render("contact", {
+    contactText: contactContent
+  });
 
 });
 
 app.get("/about", function(req, res) {
 
-  res.render("about", {aboutText: aboutContent});
+  res.render("about", {
+    aboutText: aboutContent
+  });
 
 });
 
@@ -114,7 +121,7 @@ app.get("/compose", function(req, res) {
 
 });
 
-app.post("/compose",function(req,res){
+app.post("/compose", function(req, res) {
   let newTitleText = req.body.newTitleEntry;
   let newBodyText = req.body.newBodyEntry;
 
@@ -128,16 +135,14 @@ app.post("/compose",function(req,res){
     body: newBodyText
   });
 
- dbPost.save(function(err, doc) {
-  if (err) {console.log(err);
-  }else{
-    res.redirect("/");
-  };
-});
+  dbPost.save(function(err, doc) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/");
+    };
+  });
   // posts.push(post);
-
-
-
 
 });
 
